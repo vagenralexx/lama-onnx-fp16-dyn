@@ -1,0 +1,24 @@
+{
+  "name": "lama-onnx-fp16-dyn",
+  "version": "1",
+  "description": "LaMa (big-lama) em ONNX com pesos em fp16 (a conta continua em fp32) e altura/largura dinamicas. Reconstrua o arquivo concatenando as partes em ordem.",
+  "license": "Apache-2.0",
+  "source": {
+    "model": "Carve/LaMa-ONNX",
+    "file": "lama_fp32.onnx",
+    "huggingface_commit": "c3c0c9e468934d62e79c329e35d82dd09ff8c444",
+    "sha256": "1faef5301d78db7dda502fe59966957ec4b79dd64e16f03ed96913c7a4eb68d6",
+    "original_project": "https://github.com/advimman/lama (Apache-2.0)"
+  },
+  "output": {
+    "file": "lama_wfp16_dyn.onnx",
+    "size": 106290278,
+    "sha256": "7bb5891e8b9a1628180d7ee5ca1278a9ea2729eee36ea67eb776af14fc1d53c2",
+    "inputs": ["image [1,3,H,W]", "mask [1,1,H,W]"],
+    "outputs": ["output [1,3,H,W]"]
+  },
+  "parts": [
+    { "file": "lama_wfp16_dyn.onnx.part00", "size": 55000000, "sha256": "3911182cee68683cb00f78a3dd863ff8e50ecc48f083d02859a6ec62357aeb91" },
+    { "file": "lama_wfp16_dyn.onnx.part01", "size": 51290278, "sha256": "ebda10ce5dd8db0bcdafa866a1f10bf005a182af3ce9dc61ac19e627e8054222" }
+  ]
+}

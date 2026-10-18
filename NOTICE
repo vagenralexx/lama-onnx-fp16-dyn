@@ -1,0 +1,16 @@
+lama-onnx-fp16-dyn
+==================
+
+Arquivo derivado de "Carve/LaMa-ONNX" (lama_fp32.onnx, commit c3c0c9e468934d62e79c329e35d82dd09ff8c444 no Hugging Face),
+que por sua vez converte o modelo big-lama do projeto LaMa (https://github.com/advimman/lama) para ONNX.
+O projeto LaMa e o repositorio Carve/LaMa-ONNX sao licenciados sob Apache License 2.0 (texto em LICENSE).
+
+Referencia: R. Suvorov et al., "Resolution-robust Large Mask Inpainting with Fourier Convolutions", WACV 2022.
+
+ALTERACOES feitas neste repositorio (exigidas pela licenca):
+  1. A declaracao das entradas `image` e `mask` passou de altura/largura fixas (512) para dimensoes dinamicas (H, W);
+     o grafo original ja executa em 128, 256, 384 e 512.
+  2. Os pesos de ponto flutuante com 1024 ou mais elementos passaram de fp32 para fp16, seguidos de um no Cast para fp32:
+     a conta continua em fp32 e a saida difere do original em media 0,005 a 0,02 (escala 0-255).
+  3. O arquivo resultante foi dividido em partes menores que 100 MB (apenas para hospedagem); concatene em ordem.
+Nenhum treino ou ajuste fino foi feito; os pesos sao os do big-lama (treinado em Places2).
